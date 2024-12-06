@@ -1,17 +1,7 @@
 """
-updated_visualization.py
-
 This module implements comprehensive visualization functionality for Amazon product reviews analysis.
 It creates visualizations using processed data, topic modeling results, sentiment analysis results,
 and helpfulness prediction insights.
-
-Dependencies:
-- pandas
-- numpy
-- matplotlib
-- seaborn
-- plotly
-- wordcloud
 """
 
 import pandas as pd

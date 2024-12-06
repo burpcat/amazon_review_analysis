@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+.usmlenv/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.project
+.pydevproject
+.settings/
+
+# Project-specific
+data/
+processed_data/
+topic_models/
+advanced_sentiment/
+helpfulness_analysis/
+impact_analysis/
+visualizations/
+*.csv
+*.npz
+*.pth
+*.pkl
+*.model
+*.bin
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
+# OS-specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment variables
+.env
+.env.*
+
+# Distribution/packaging
+*.zip
+*.tar.gz
+*.rar
+
+# Model files and large files
+*.h5
+*.hdf5
+*.saved_model/
+*.pb
+
+# Temp files
+tmp/
+temp/

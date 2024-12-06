@@ -6,7 +6,7 @@ from textblob import TextBlob
 import re
 from datetime import datetime
 import os
-from product_category_classifier import ProductCategoryClassifier
+from src.product_category_classifier import ProductCategoryClassifier
 from tqdm.auto import tqdm  # Added for progress bars
 tqdm.pandas()  # Enable progress_apply for pandas
 
@@ -15,7 +15,7 @@ def load_and_clean_data(filename='Reviews.csv'):
     Load and perform initial cleaning of the Amazon reviews dataset
     """
     print("Loading data...")
-    df = pd.read_csv(filename)
+    df = pd.read_csv(f'data/{filename}')
     
     print("Converting timestamps...")
     df['Time'] = pd.to_datetime(df['Time'], unit='s')
@@ -174,7 +174,8 @@ def main_processing_pipeline(input_filename='Reviews.csv'):
     print("\n=== Processing complete! ===")
     return df, category_features, category_feature_names, timestamp
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
+def review_processor_runner():
     # Run the pipeline
     df, category_features, category_feature_names, timestamp = main_processing_pipeline()
     

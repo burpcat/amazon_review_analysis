@@ -1,7 +1,3 @@
-"""
-nltk_setup.py - Run this script once to download required NLTK resources
-"""
-
 import nltk
 
 def download_nltk_resources():

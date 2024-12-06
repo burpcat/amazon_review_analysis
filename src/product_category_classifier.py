@@ -1,6 +1,4 @@
 """
-product_category_classifier.py
-
 This module implements a product category classifier for Amazon reviews
 using text-based classification approach.
 """
