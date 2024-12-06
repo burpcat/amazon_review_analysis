@@ -269,7 +269,29 @@ def main():
         print("\nTraining sentiment model...")
         analyzer.train_model(train_texts, train_labels)
         
-        # Analyze patterns
+        # Add sentiment predictions to DataFrame
+        print("\nGenerating sentiment scores...")
+        dataset = ReviewDataset(df['Text'].values, np.zeros(len(df)), analyzer.tokenizer)
+        dataloader = DataLoader(dataset, batch_size=32, shuffle=False)
+        
+        all_sentiments = []
+        analyzer.model.eval()
+        with torch.no_grad():
+            for batch in tqdm(dataloader, desc="Calculating sentiment scores"):
+                input_ids = batch['input_ids'].to(analyzer.device)
+                attention_mask = batch['attention_mask'].to(analyzer.device)
+                outputs = analyzer.model(input_ids=input_ids, attention_mask=attention_mask)
+                logits = outputs.logits
+                # Convert logits to sentiment scores (-1 to 1 range)
+                sentiments = torch.softmax(logits, dim=1)
+                # Use positive class probability as sentiment score
+                sentiment_scores = sentiments[:, 2].cpu().numpy() - sentiments[:, 0].cpu().numpy()
+                all_sentiments.extend(sentiment_scores)
+        
+        df['sentiment_score'] = all_sentiments
+        
+        # Now analyze patterns with the added sentiment scores
+        print("\nAnalyzing temporal trends...")
         temporal_trends = analyzer.analyze_temporal_trends(df)
         category_patterns = analyzer.analyze_category_patterns(df)
         
@@ -282,6 +304,8 @@ def main():
         analyzer.create_visualizations(results)
         
         print("\nAdvanced sentiment analysis completed successfully!")
+        
+        return df  # Return the DataFrame with sentiment scores
         
     except Exception as e:
         print(f"An error occurred: {str(e)}")
